@@ -1,0 +1,11 @@
+com\omnius\taskmanager\controller\LogoutController.class
+com\omnius\taskmanager\model\Task.class
+com\omnius\taskmanager\controller\WelcomeController.class
+com\omnius\taskmanager\service\ScheduleTasks.class
+com\omnius\taskmanager\service\TaskService.class
+com\omnius\taskmanager\TaskManagerApplication.class
+com\omnius\taskmanager\controller\TaskController.class
+com\omnius\taskmanager\controller\ErrorController.class
+com\omnius\taskmanager\security\SecurityConfiguration.class
+com\omnius\taskmanager\service\ITaskService.class
+com\omnius\taskmanager\repository\TaskRepository.class
