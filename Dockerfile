@@ -1,5 +1,5 @@
 FROM oscarfonts/h2
-ADD target/Scheduler-Spring-0.0.1-SNAPSHOT.war docker-spring-boot.war
-RUN bash -c 'touch /docker-spring-boot.war'
+ADD target/Scheduler-Spring-0.0.1-SNAPSHOT.war taskmanager.war
+RUN bash -c 'touch /taskmanager.war'
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","docker-spring-boot.war"]
+ENTRYPOINT ["java","-jar","taskmanager.war"]
