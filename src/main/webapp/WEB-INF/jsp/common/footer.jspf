@@ -1,0 +1,25 @@
+<script src="webjars/jquery/1.9.1/jquery.min.js"></script>
+<script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script
+	src="webjars/bootstrap-datetimepicker/2.4.4/js/bootstrap-datetimepicker.js"></script>
+<script>
+	$('#duedate').datetimepicker({
+    format: 'yyyy-mm-dd hh:ii'
+	});
+</script>
+
+<script>
+	$('#remindat').datetimepicker({
+    format: 'yyyy-mm-dd hh:ii'
+	});
+</script>
+
+
+<div class="footer">
+	<h1>
+		<a href="http://omnius.com">
+			Task Scheduler </a>
+	</h1>
+</div>
+</body>
+</html>
