@@ -2,6 +2,7 @@ package com.omnius.taskmanager.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,6 +25,7 @@ public class Task {
 	private String username;
 	
 	@CreationTimestamp
+	@Column(name = "CREATEDAT", nullable = false, updatable = false, columnDefinition = "TIMESTAMP")
 	private Date createdat;
 	@Temporal(TemporalType.TIMESTAMP)
     @UpdateTimestamp

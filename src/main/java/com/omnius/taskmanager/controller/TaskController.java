@@ -64,13 +64,13 @@ public class TaskController {
 	}
 
 	@RequestMapping(value = "/add-task", method = RequestMethod.GET)
-	public String showAddTodoPage(ModelMap model) {
+	public String showAddTaskPage(ModelMap model) {
 		model.addAttribute("task", new Task());
 		return "task";
 	}
 
 	@RequestMapping(value = "/delete-task", method = RequestMethod.GET)
-	public String deleteTodo(@RequestParam long id) {
+	public String deleteTask(@RequestParam long id) {
 		taskService.deleteTask(id);
 		return "redirect:/list-tasks";
 	}
@@ -83,7 +83,7 @@ public class TaskController {
 	}
 
 	@RequestMapping(value = "/update-task", method = RequestMethod.POST)
-	public String updateTodo(ModelMap model, @Valid Task task, BindingResult result) {
+	public String updateTask(ModelMap model, @Valid Task task, BindingResult result) {
 
 		if (result.hasErrors()) {
 			return "task";
@@ -95,7 +95,7 @@ public class TaskController {
 	}
 
 	@RequestMapping(value = "/add-task", method = RequestMethod.POST)
-	public String addTodo(ModelMap model, @Valid Task task, BindingResult result) {
+	public String addTask(ModelMap model, @Valid Task task, BindingResult result) {
 
 		if (result.hasErrors()) {
 			return "task";
