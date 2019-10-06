@@ -38,7 +38,12 @@ public class TaskService implements ITaskService {
 
 	@Override
 	public TaskDTO getTaskById(long id) {
-		TaskDTO taskDto = ObjectMapperUtils.map(taskRepository.findById(id), TaskDTO.class);
+		Optional<Task> taskbyId = taskRepository.findById(id);
+		System.out.println("---------------------------"+taskbyId.isPresent());
+
+		TaskDTO taskDto = ObjectMapperUtils.map(taskbyId.get(), TaskDTO.class);
+		System.out.println("---------------------------"+taskDto.getCreatedat());
+
 		return taskDto;
 	}
 

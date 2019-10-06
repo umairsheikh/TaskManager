@@ -1,5 +1,6 @@
 package com.omnius.taskmanager.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -17,7 +18,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 @Table(name = "tasks")
-public class Task {
+public class Task implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

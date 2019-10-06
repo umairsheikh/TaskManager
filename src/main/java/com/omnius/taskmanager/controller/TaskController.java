@@ -78,14 +78,17 @@ public class TaskController {
 
 	@RequestMapping(value = "/update-task", method = RequestMethod.GET)
 	public String showUpdateTaskPage(@RequestParam long id, ModelMap model) {
-		TaskDTO task = taskService.getTaskById(id);
-		model.put("task", task);
-		return "task";
+		System.out.println("--------------------------update get req");
+
+		TaskDTO taskdto = taskService.getTaskById(id);
+		model.put("task", taskdto);
+		return "taskPage";
 	}
 
 	@RequestMapping(value = "/update-task", method = RequestMethod.POST)
 	public String updateTask(ModelMap model, @Valid TaskDTO task, BindingResult result) {
 
+		System.out.println("--------------------------update post req");
 		if (result.hasErrors()) {
 			return "task";
 		}
