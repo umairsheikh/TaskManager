@@ -32,7 +32,7 @@ public class TaskService implements ITaskService {
 	
 	@Override
 	public List<TaskDTO> getTasksByUser(String username) {
-		List<TaskDTO> listOfTaskDTOs = ObjectMapperUtils.mapAll(taskRepository.findByUsername(username), TaskDTO.class);
+		List<TaskDTO> listOfTaskDTOs = ObjectMapperUtils.mapAll(taskRepository.findByUsernameOrderByDuedate(username), TaskDTO.class);
 		return listOfTaskDTOs;
 	}
 

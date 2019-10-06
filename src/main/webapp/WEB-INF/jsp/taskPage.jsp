@@ -24,8 +24,7 @@
 
 						<fieldset class="form-group">
 							<form:label path="remindat">Postpone till date</form:label>
-							<form:input path="remindat" type="text" class="form-control"
-								required="required" />
+							<form:input path="remindat" type="text" class="form-control" />
 							<form:errors path="remindat" cssClass="text-warning" />
 						</fieldset>
 

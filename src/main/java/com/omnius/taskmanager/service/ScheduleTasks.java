@@ -25,7 +25,7 @@ public class ScheduleTasks {
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
     
     
-    @Scheduled(fixedDelayString = "#{ T(java.util.concurrent.ThreadLocalRandom).current().nextInt(100000,1000000) }" )
+    @Scheduled(fixedDelayString = "#{ T(java.util.concurrent.ThreadLocalRandom).current().nextInt(1000,10000) }" )
     public void callTaskGenerator() {
     	counter++; 
     	String date = dateFormat.format(new Date());

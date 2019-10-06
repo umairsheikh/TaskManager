@@ -66,8 +66,8 @@ public class TaskController {
 
 	@RequestMapping(value = "/add-task", method = RequestMethod.GET)
 	public String showAddTaskPage(ModelMap model) {
-		model.addAttribute("task", new Task());
-		return "task";
+		model.addAttribute("task", new TaskDTO());
+		return "taskPage";
 	}
 
 	@RequestMapping(value = "/delete-task", method = RequestMethod.GET)
