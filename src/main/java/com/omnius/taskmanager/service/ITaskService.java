@@ -5,22 +5,23 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import com.omnius.taskmanager.dto.TaskDTO;
 import com.omnius.taskmanager.model.Task;
 
 public interface ITaskService {
 
-	List<Task> getTasksByUser(String user);
+	List<TaskDTO> getTasksByUser(String user);
 
-	Optional<Task> getTaskById(long id);
+	TaskDTO getTaskById(long id);
 
-	void updateTask(Task task);
+	TaskDTO updateTask(TaskDTO task);
 
-	Task addTask(String username,String title, String desc, Date duedate,Date resolvedat,Date remindat);
+	TaskDTO addTask(String username,String title, String desc, Date duedate,Date resolvedat,Date remindat);
 
 	void deleteTask(long id);
-	
-	Task saveTask(Task task);
 
-	List<Task> getAllTasks();
+	List<TaskDTO> getAllTasks();
+
+	TaskDTO saveTask(TaskDTO task);
 
 }

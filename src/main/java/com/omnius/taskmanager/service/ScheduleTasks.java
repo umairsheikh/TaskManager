@@ -4,17 +4,15 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.omnius.taskmanager.dto.TaskDTO;
+
 import org.json.JSONObject;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.util.JSONPObject;
-import com.omnius.taskmanager.model.Task;
+
 
 @Component
 public class ScheduleTasks {
@@ -27,7 +25,8 @@ public class ScheduleTasks {
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
     
     
-    @Scheduled(fixedDelayString = "#{ T(java.util.concurrent.ThreadLocalRandom).current().nextInt(1000,10000) }" )
+    //@Scheduled(fixedDelayString = "#{ T(java.util.concurrent.ThreadLocalRandom).current().nextInt(1000,10000) }" )
+    @Scheduled(fixedDelay = 100000 )
     public void callTaskGenerator() {
     	counter++; 
     	String date = dateFormat.format(new Date());
@@ -45,10 +44,10 @@ public class ScheduleTasks {
 
      	 
     	 ObjectMapper objectMapper = new ObjectMapper();
-    	 Task task;
+    	 TaskDTO task;
 		try {
-			task = objectMapper.readValue(json.toString(), Task.class);
-			 Task createdTask = taskService.addTask("admin",task.getTitle(), task.getDescription(), task.getDuedate(),task.getResolvedat(),task.getRemindat());
+			task = objectMapper.readValue(json.toString(), TaskDTO.class);
+			TaskDTO createdTask = taskService.addTask("admin",task.getTitle(), task.getDescription(), task.getDuedate(),task.getResolvedat(),task.getRemindat());
 			 createdTask.showTaskData();			
 
 		} catch (IOException e) {

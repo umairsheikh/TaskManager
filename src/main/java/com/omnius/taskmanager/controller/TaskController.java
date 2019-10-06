@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.omnius.taskmanager.dto.TaskDTO;
 import com.omnius.taskmanager.model.Task;
 import com.omnius.taskmanager.service.ITaskService;
 
@@ -40,9 +41,9 @@ public class TaskController {
 
 	
 	@GetMapping("/all")
-    public List<Task> getAllTasks() {
+    public List<TaskDTO> getAllTasks() {
     	System.out.println("getallTasks");
-    	List <Task> tasks = taskService.getAllTasks();
+    	List <TaskDTO> tasks = taskService.getAllTasks();
         return tasks;
     }	   
 	
@@ -77,13 +78,13 @@ public class TaskController {
 
 	@RequestMapping(value = "/update-task", method = RequestMethod.GET)
 	public String showUpdateTaskPage(@RequestParam long id, ModelMap model) {
-		Task task = taskService.getTaskById(id).get();
+		TaskDTO task = taskService.getTaskById(id);
 		model.put("task", task);
 		return "task";
 	}
 
 	@RequestMapping(value = "/update-task", method = RequestMethod.POST)
-	public String updateTask(ModelMap model, @Valid Task task, BindingResult result) {
+	public String updateTask(ModelMap model, @Valid TaskDTO task, BindingResult result) {
 
 		if (result.hasErrors()) {
 			return "task";
@@ -95,7 +96,7 @@ public class TaskController {
 	}
 
 	@RequestMapping(value = "/add-task", method = RequestMethod.POST)
-	public String addTask(ModelMap model, @Valid Task task, BindingResult result) {
+	public String addTask(ModelMap model, @Valid TaskDTO task, BindingResult result) {
 
 		if (result.hasErrors()) {
 			return "task";

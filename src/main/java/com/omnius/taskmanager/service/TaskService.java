@@ -4,11 +4,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.omnius.taskmanager.dto.TaskDTO;
 import com.omnius.taskmanager.model.Task;
 import com.omnius.taskmanager.repository.TaskRepository;
+import com.omnius.taskmanager.util.ObjectMapperUtils;
 
 @Service
 public class TaskService implements ITaskService {
@@ -17,41 +20,56 @@ public class TaskService implements ITaskService {
 	private TaskRepository taskRepository;
 
 	
+	ModelMapper modelMapper = new ModelMapper();
+	
 	@Override
-	public List<Task> getAllTasks() {
-			  return taskRepository.findAll();
+	public List<TaskDTO> getAllTasks() {
+		
+		
+		List<TaskDTO> listOfTaskDTOs = ObjectMapperUtils.mapAll(taskRepository.findAll(), TaskDTO.class);
+		return listOfTaskDTOs;
 	}
 	
 	@Override
-	public List<Task> getTasksByUser(String username) {
-		return taskRepository.findByUsername(username);
+	public List<TaskDTO> getTasksByUser(String username) {
+		List<TaskDTO> listOfTaskDTOs = ObjectMapperUtils.mapAll(taskRepository.findByUsername(username), TaskDTO.class);
+		return listOfTaskDTOs;
 	}
 
 	@Override
-	public Optional<Task> getTaskById(long id) {
-		return taskRepository.findById(id);
+	public TaskDTO getTaskById(long id) {
+		TaskDTO taskDto = ObjectMapperUtils.map(taskRepository.findById(id), TaskDTO.class);
+		return taskDto;
 	}
 
 	@Override
-	public void updateTask(Task task) {
-		taskRepository.save(task);
+	public TaskDTO updateTask(TaskDTO task) {
+		
+		Task newTask = ObjectMapperUtils.map(task, Task.class);
+		TaskDTO newTaskDto = ObjectMapperUtils.map(taskRepository.save(newTask), TaskDTO.class);
+		return newTaskDto;
 	}
 
 	@Override
-	public Task addTask(String username,String title, String desc, Date duedate,Date resolvedat,Date remindat) {
-		return taskRepository.save(new Task(username,title, desc, duedate, resolvedat,remindat));
+	public TaskDTO addTask(String username,String title, String desc, Date duedate,Date resolvedat,Date remindat) {
+		Task newTask= taskRepository.save(new Task(username,title, desc, duedate, resolvedat,remindat));
+		TaskDTO newTaskDto = ObjectMapperUtils.map(newTask, TaskDTO.class);
+		return newTaskDto;
 	}
 
 	@Override
 	public void deleteTask(long id) {
 		Optional<Task> task = taskRepository.findById(id);
-		if (task.isPresent()) {
+		if (task.isPresent()) 
+		{
 			taskRepository.delete(task.get());
 		}
 	}
 
 	@Override
-	public Task saveTask(Task task) {
-		return taskRepository.save(task);
+	public TaskDTO saveTask(TaskDTO task) {
+		Task newTask = ObjectMapperUtils.map(task, Task.class);
+		TaskDTO newTaskDto = ObjectMapperUtils.map(taskRepository.save(newTask), TaskDTO.class);
+		return newTaskDto;
 	}
 }
