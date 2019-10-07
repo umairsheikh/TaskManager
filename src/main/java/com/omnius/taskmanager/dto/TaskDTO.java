@@ -46,9 +46,7 @@ public class TaskDTO implements Serializable  {
 		this.description = desc;
 		this.duedate = duedate;
 		this.resolvedat= resolvedat;
-		this.remindat = remindat;
-		  priority=this.priority;
-		  status=this.status;	
+		this.remindat = remindat;	
 	}
 	
 	public long getId() {
@@ -61,7 +59,14 @@ public class TaskDTO implements Serializable  {
 
 	public void showTaskData()
 	{
-			System.out.println(" Created AT"+getCreatedat().toString() +" Title "+title);
+//			System.out.println(" Created AT"+getCreatedat().toString() +" Title "+title);
+//			System.out.println(" Updated AT"+getUpdatedat().toString() +" Desc "+description);
+//			if(remindat !=null)
+//			System.out.println(" Remind/Postoponed Till"+getRemindat().toString() +" Title "+title);
+//			if(resolvedat !=null)
+//			System.out.println(" Resolved AT"+getResolvedat().toString() +" Title "+title);
+//			if(duedate !=null)
+//			System.out.println(" Duedate AT"+getDuedate().toString() +" Title "+title);
 	}
 	public Date getCreatedat() {
 		return createdat;

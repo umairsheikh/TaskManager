@@ -10,5 +10,6 @@ import com.omnius.taskmanager.model.Task;
 public interface TaskRepository extends JpaRepository<Task, Long>{
 	
 	List<Task> findByUsername(String user);
-	List<Task> findByUsernameOrderByDuedate(String user);
+	List<Task> findAllByUsernameOrderByDuedateAsc(String user);
+	
 }

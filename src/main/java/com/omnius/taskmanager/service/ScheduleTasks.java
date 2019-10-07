@@ -25,7 +25,7 @@ public class ScheduleTasks {
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
     
     
-    @Scheduled(fixedDelayString = "#{ T(java.util.concurrent.ThreadLocalRandom).current().nextInt(1000,10000) }" )
+    @Scheduled(fixedDelayString = "#{ T(java.util.concurrent.ThreadLocalRandom).current().nextInt(10000,100000) }" )
     public void callTaskGenerator() {
     	counter++; 
     	String date = dateFormat.format(new Date());
@@ -36,18 +36,13 @@ public class ScheduleTasks {
     	 json.put("priority",1);
     	 json.put("status",1);
     	 json.put("duedate",date);
-    	 json.put("resolvedat",date);
-    	 json.put("remindat",date);
-     	 
-
-
      	 
     	 ObjectMapper objectMapper = new ObjectMapper();
     	 TaskDTO task;
 		try {
 			task = objectMapper.readValue(json.toString(), TaskDTO.class);
-			TaskDTO createdTask = taskService.addTask("admin",task.getTitle(), task.getDescription(), task.getDuedate(),task.getResolvedat(),task.getRemindat());
-			 createdTask.showTaskData();			
+			TaskDTO createdTask = taskService.addTask("admin",task.getTitle(), task.getDescription(), task.getDuedate(),null);
+			// createdTask.showTaskData();			
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

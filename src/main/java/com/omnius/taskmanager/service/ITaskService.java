@@ -16,7 +16,7 @@ public interface ITaskService {
 
 	TaskDTO updateTask(TaskDTO task);
 
-	TaskDTO addTask(String username,String title, String desc, Date duedate,Date resolvedat,Date remindat);
+	TaskDTO addTask(String username,String title, String desc, Date duedate,Date resolvedat);
 
 	void deleteTask(long id);
 

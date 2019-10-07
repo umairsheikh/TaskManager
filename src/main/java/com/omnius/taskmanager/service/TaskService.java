@@ -32,32 +32,29 @@ public class TaskService implements ITaskService {
 	
 	@Override
 	public List<TaskDTO> getTasksByUser(String username) {
-		List<TaskDTO> listOfTaskDTOs = ObjectMapperUtils.mapAll(taskRepository.findByUsernameOrderByDuedate(username), TaskDTO.class);
+		List<TaskDTO> listOfTaskDTOs = ObjectMapperUtils.mapAll(taskRepository.findAllByUsernameOrderByDuedateAsc(username), TaskDTO.class);
 		return listOfTaskDTOs;
 	}
 
 	@Override
 	public TaskDTO getTaskById(long id) {
 		Optional<Task> taskbyId = taskRepository.findById(id);
-		System.out.println("---------------------------"+taskbyId.isPresent());
-
 		TaskDTO taskDto = ObjectMapperUtils.map(taskbyId.get(), TaskDTO.class);
-		System.out.println("---------------------------"+taskDto.getCreatedat());
-
 		return taskDto;
 	}
 
 	@Override
 	public TaskDTO updateTask(TaskDTO task) {
 		
+		Optional<Task> taskbyId = taskRepository.findById(task.getId());		
 		Task newTask = ObjectMapperUtils.map(task, Task.class);
 		TaskDTO newTaskDto = ObjectMapperUtils.map(taskRepository.save(newTask), TaskDTO.class);
 		return newTaskDto;
 	}
 
 	@Override
-	public TaskDTO addTask(String username,String title, String desc, Date duedate,Date resolvedat,Date remindat) {
-		Task newTask= taskRepository.save(new Task(username,title, desc, duedate, resolvedat,remindat));
+	public TaskDTO addTask(String username,String title, String desc, Date duedate,Date resolvedat) {
+		Task newTask= taskRepository.save(new Task(username,title, desc, duedate, resolvedat));
 		TaskDTO newTaskDto = ObjectMapperUtils.map(newTask, TaskDTO.class);
 		return newTaskDto;
 	}

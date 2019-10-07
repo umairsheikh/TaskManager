@@ -9,23 +9,33 @@
 					<form:form method="post" modelAttribute="task">
 						<form:hidden path="id" />
 						<fieldset class="form-group">
-							<form:label path="description">Description</form:label>
+							<form:label path="title">Title*</form:label>
+							<form:input path="title" type="text" class="form-control"
+								required="required" />
+							<form:errors path="title" cssClass="text-warning" />
+						</fieldset>
+						<fieldset class="form-group">
+							<form:label path="description">Description*</form:label>
 							<form:input path="description" type="text" class="form-control"
 								required="required" />
 							<form:errors path="description" cssClass="text-warning" />
 						</fieldset>
 
 						<fieldset class="form-group">
-							<form:label path="duedate">Due Date</form:label>
+							<form:label path="duedate">Due Date*</form:label>
 							<form:input path="duedate" type="text" class="form-control"
 								required="required" />
 							<form:errors path="duedate" cssClass="text-warning" />
 						</fieldset>
 
 						<fieldset class="form-group">
-							<form:label path="remindat">Postpone till date</form:label>
+							<form:label path="duedate">Postponed</form:label>
 							<form:input path="remindat" type="text" class="form-control" />
-							<form:errors path="remindat" cssClass="text-warning" />
+						</fieldset>
+						
+						<fieldset class="form-group">
+							<form:label path="duedate">Resolved</form:label>
+							<form:input path="resolvedat" type="text" class="form-control" />
 						</fieldset>
 
 						<button type="submit" class="btn btn-success">Save</button>

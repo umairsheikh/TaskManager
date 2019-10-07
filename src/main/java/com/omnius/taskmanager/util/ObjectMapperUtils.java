@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.modelmapper.Conditions;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 
@@ -37,6 +38,7 @@ public class ObjectMapperUtils {
      * @return new object of <code>outClass</code> type.
      */
     public static <D, T> D map(final T entity, Class<D> outClass) {
+    	modelMapper.getConfiguration().setPropertyCondition(Conditions.isNotNull());
         return modelMapper.map(entity, outClass);
     }
 

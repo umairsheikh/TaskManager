@@ -3,6 +3,7 @@ package com.omnius.taskmanager.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,10 +15,12 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 @Table(name = "tasks")
+@DynamicUpdate
 public class Task implements Serializable{
 
 	@Id
@@ -28,14 +31,20 @@ public class Task implements Serializable{
 	@CreationTimestamp
 	@Column(name = "CREATEDAT", nullable = false, updatable = false, columnDefinition = "TIMESTAMP")
 	private Date createdat;
+	
 	@Temporal(TemporalType.TIMESTAMP)
     @UpdateTimestamp
 	private Date updatedat;	
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date duedate;
+	
 	@Temporal(TemporalType.TIMESTAMP)
+	@Column( nullable = true)
 	private Date resolvedat;
+	
 	@Temporal(TemporalType.TIMESTAMP)
+	@Column( nullable = true)
 	private Date remindat;
 	@Size(min = 2, message = "Enter at least 10 Characters...")
 	private String title;
@@ -44,20 +53,18 @@ public class Task implements Serializable{
 	
 	private int priority;
 	private int status;	
-
 	
 	public Task() {
 		super();
 	}
 
-	public Task(String user,String title, String desc, Date duedate,Date resolvedat,Date remindat) {
+	public Task(String user,String title, String desc, Date duedate,Date resolvedat) {
 		super();
 		this.username = user;
 		this.title = title;
 		this.description = desc;
 		this.duedate = duedate;
 		this.resolvedat= resolvedat;
-		this.remindat = remindat;
 		
 	}
 
