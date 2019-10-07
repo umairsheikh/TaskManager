@@ -79,39 +79,22 @@ public class TaskController {
 	@RequestMapping(value = "/update-task", method = RequestMethod.GET)
 	public String showUpdateTaskPage(@RequestParam long id, ModelMap model) {
 		TaskDTO taskdto = taskService.getTaskById(id);
-		taskdto.showTaskData();
 		model.put("task", taskdto);
 		return "taskPage";
 	}
 
 	@RequestMapping(value = "/update-task", method = RequestMethod.POST)
 	public String updateTask(ModelMap model, @Valid TaskDTO task, BindingResult result) {
-
-		System.out.println("--------------------------update post req");
+		task.setUsername(getLoggedInUsername(model));
 //		if (result.hasErrors()) {
 //			return "task";
 //		}
-	   task.setUsername(getLoggedInUsername(model));
-	   
-	   if(task == null)
-	   {
-	    System.out.println("--------------------------resolved"+task.getResolvedat() );
-		System.out.println("--------------------------postponed"+task.getRemindat() );
-	   }
-	   else
-	   { 
-		   TaskDTO taskDto = taskService.updateTask(task);
-	   }
+	   TaskDTO taskDto = taskService.updateTask(task);
 	   return "redirect:/list-tasks";
 	}
 
 	@RequestMapping(value = "/add-task", method = RequestMethod.POST)
 	public String addTask(ModelMap model, @Valid TaskDTO task, BindingResult result) {
-
-		if (result.hasErrors()) {
-			return "task";
-		}
-
 		task.setUsername(getLoggedInUsername(model));
 		taskService.saveTask(task);
 		return "redirect:/list-tasks";
